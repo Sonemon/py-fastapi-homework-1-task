@@ -1,5 +1,23 @@
 # Movie Theater API Project
 
+## Table of Contents
+- [Project Structure Overview](#project-structure-overview)
+- [Purpose of the Structure](#purpose-of-the-structure)
+- [Tip: Using `get_db` for Dependency Injection in FastAPI](#tip-using-get_db-for-dependency-injection-in-fastapi)
+- [How to Run the Project](#how-to-run-the-project)
+  - [Running the Project with Docker Compose](#running-the-project-with-docker-compose)
+  - [Manually Running the Project](#manually-running-the-project)
+- [Notes](#notes)
+- [Run Project with PyCharm](#run-project-with-pycharm)
+- [Task Description: Extending the Cinema Application](#task-description-extending-the-cinema-application)
+  - [Database Information](#database-information)
+  - [Endpoints to Implement](#endpoints-to-implement)
+  - [Instructions](#instructions)
+
+---
+
+## Movie Theater API Project
+
 Welcome to the **Movie Theater API** project! This is an educational assignment designed to help you practice and improve your skills in building web applications using FastAPI, SQLAlchemy, and Docker. The foundation of the project has already been prepared, including:
 
 - **Database setup**: A SQLite database is configured and ready to use.
@@ -101,13 +119,13 @@ The `get_db` function is a generator that provides a SQLAlchemy session for inte
 
 ```python
 from fastapi import Depends, APIRouter
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 from database import get_db  # Import the get_db generator
 
 router = APIRouter()
 
 @router.get("/example")
-def example_route(db: Session = Depends(get_db)):
+async def example_route(db: AsyncSession = Depends(get_db)):
     # Use the db session here to interact with the database
 ```
 
@@ -200,6 +218,18 @@ If you prefer to run the project without Docker, you can set it up manually by f
   ```
 
 This setup ensures flexibility, whether you prefer running the project in a containerized environment or directly on your development machine.
+
+
+### Run project with PyCharm
+
+1. Mark the `src` directory as root
+    ![mark src directory as root](./assets/images/1_mark_directory_as_source_root.png)
+2. Close all open code tabs
+3. Restart `PyCharm`
+4. Create a new Run Configuration for the `FastAPI` project
+    ![create new fastapi run configuration](./assets/images/2_create_new_run_config.png)
+5. Run the project via `PyCharm` and use breakpoints for debugging
+
 
 ### Task Description: Extending the Cinema Application
 

@@ -24,7 +24,7 @@ async def get_list_of_movies(
 
     total_pages = (total_items + per_page - 1) // per_page
 
-    movie_details = [MovieDetailResponseSchema.from_orm(movie) for movie in movies]
+    movie_details = [MovieDetailResponseSchema.model_validate(movie) for movie in movies]
 
     base_url = "/theater/movies/"
     prev_page = f"{base_url}?page={page - 1}&per_page={per_page}" if page > 1 else None

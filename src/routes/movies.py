@@ -6,6 +6,7 @@ from schemas.movies import MovieListResponseSchema, MovieDetailResponseSchema
 
 router = APIRouter()
 
+
 @router.get("/movies/", response_model=MovieListResponseSchema)
 async def get_list_of_movies(
         page: int = Query(1, ge=1),
@@ -35,6 +36,7 @@ async def get_list_of_movies(
         total_items=total_items
     )
 
+
 @router.get("/movies/{movie_id}/", response_model=MovieDetailResponseSchema)
 async def get_movie_details_by_id(
         movie_id: int = Path(..., ge=1),
@@ -45,4 +47,4 @@ async def get_movie_details_by_id(
     if not movie:
         raise HTTPException(status_code=404, detail="Movie with the given ID was not found.")
 
-    return movie
+    return MovieDetailResponseSchema.model_validate(movie)
